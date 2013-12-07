@@ -1,0 +1,19 @@
+[ 
+    { "type": "Offroad", "name": "Day 1", "ID": "offroad_day_1" },
+    { "type": "Offroad", "name": "Day 2", "ID": "offroad_day_2" },
+    { "type": "Offroad", "name": "Day 3", "ID": "offroad_day_3" },
+    { "type": "Offroad", "name": "Day 4", "ID": "offroad_day_4" },
+    { "type": "Offroad", "name": "Day 5", "ID": "offroad_day_5" },
+    { "type": "Onroad", "name": "Day 1", "ID": "onroad_day_1" },
+    { "type": "Onroad", "name": "Day 2", "ID": "onroad_day_2" },
+    { "type": "Onroad", "name": "Day 3", "ID": "onroad_day_3" },
+    { "type": "Onroad", "name": "Day 4", "ID": "onroad_day_4" },
+    { "type": "Onroad", "name": "Day 5", "ID": "onroad_day_5" }
+]
+
+
+
+   
+
+    
+
