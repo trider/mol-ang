@@ -1,180 +1,181 @@
 
 Parse.initialize("cumLBO8rBloI9peNr7TuU2q6TOJdqL7mMz5faNFi", "YSfUfo6hXUwYPbPelzhO1v78i7C4pBv1RTFVSWJW");
+L_PREFER_CANVAS = true;
+L_DISABLE_3D = true;
 
-$(document).ready(function ()
-{
+var Note = Parse.Object.extend("NoteObject");
 
-    L_PREFER_CANVAS = true;
-    L_DISABLE_3D = true;
+//$(document).ready(function ()
+//{
 
-    var Note = Parse.Object.extend("NoteObject");
+//    
 
-    setMapSize();
-    var marker;
-    var timer;
-    var map;
-    var rides;
-    var interval =  60;
-    var count = 0;
-    var val;
-
-
-    $('#map, #ctrls, #btnStart, #btnStop, #btnShow, #btnHide, #txt, #aboutPage, #settings').hide();
-    $('#maps').show();
+//    setMapSize();
+//    var marker;
+//    var timer;
+//    var map;
+//    var rides;
+//    var interval =  60;
+//    var count = 0;
+//    var val;
 
 
-    $('#bar').val(1);
-    $('#slider').slider().on('slide', function (ev)
-    {
-        $('#bar').val(ev.value);
-    });
-
-    $(".ride").click(function ()
-    {
-        $("#prependedRide").val(this.id);
-    });
-
-    $(".day").click(function ()
-    {
-        $("#prependedDay").val(this.id);
-    });
-
-    $("#btnChoose").click(function ()
-    {
-        $('#maps').hide();
-        $('#map, #ctrls, #btnStart, #btnShow').show();
-        val = $('#prependedRide').val() + '_' + $('#prependedDay').val();
-        $.get('ride_data.csv', function (csv)
-        {
-            var rides = $.csv.toObjects(csv);
-            $.each(rides, function (i, json)
-            {
-                if (json.name === val)
-                {
-                    map = createMap(map, json);
-                }
-            });
-        });
-    });
-
-    $("#btnAbout").click(function ()
-    {
-        $('#maps').hide();
-        $('#aboutPage, #aboutTxt').show();
-        $('#donateTxt').hide();
-    });
-
-    $("#btnDonate").click(function ()
-    {
-        $('#maps').hide();
-        $('#aboutPage, #donateTxt').show();
-        $('#aboutTxt').hide();
-    });
-
-    $("#btnBack").click(function ()
-    {
-        $('#aboutPage, #aboutTxt, #donateTxt').hide();
-        $('#maps').show();
-    });
+//    $('#map, #ctrls, #btnStart, #btnStop, #btnShow, #btnHide, #txt, #aboutPage, #settings').hide();
+//    $('#maps').show();
 
 
-    $("#btnChange").click(function ()
-    {
-        location.reload();
-    });
+//    $('#bar').val(1);
+//    $('#slider').slider().on('slide', function (ev)
+//    {
+//        $('#bar').val(ev.value);
+//    });
+
+//    $(".ride").click(function ()
+//    {
+//        $("#prependedRide").val(this.id);
+//    });
+
+//    $(".day").click(function ()
+//    {
+//        $("#prependedDay").val(this.id);
+//    });
+
+//    $("#btnChoose").click(function ()
+//    {
+//        $('#maps').hide();
+//        $('#map, #ctrls, #btnStart, #btnShow').show();
+//        val = $('#prependedRide').val() + '_' + $('#prependedDay').val();
+//        $.get('ride_data.csv', function (csv)
+//        {
+//            var rides = $.csv.toObjects(csv);
+//            $.each(rides, function (i, json)
+//            {
+//                if (json.name === val)
+//                {
+//                    map = createMap(map, json);
+//                }
+//            });
+//        });
+//    });
+
+//    $("#btnAbout").click(function ()
+//    {
+//        $('#maps').hide();
+//        $('#aboutPage, #aboutTxt').show();
+//        $('#donateTxt').hide();
+//    });
+
+//    $("#btnDonate").click(function ()
+//    {
+//        $('#maps').hide();
+//        $('#aboutPage, #donateTxt').show();
+//        $('#aboutTxt').hide();
+//    });
+
+//    $("#btnBack").click(function ()
+//    {
+//        $('#aboutPage, #aboutTxt, #donateTxt').hide();
+//        $('#maps').show();
+//    });
 
 
-    $("#btnShow").click(function ()
-    {
-        $("#txt, #btnHide").show();
-        $("#map, #btnShow, .controls-row").hide();
-
-    });
-    $("#btnHide").click(function ()
-    {
-        $("#txt, #btnHide").hide();
-        $("#map, #btnShow, .controls-row").show();
-    });
-    $("#btnSettings").click(function ()
-    {
-        $("#settings, #btnClose").show();
-        $("#map, #btnShow, .controls-row, #counter, #counter2").hide();
-    });
-    $("#btnSet").click(function ()
-    {
-        $("#settings, #btnClose").hide();
-        interval = $('#bar').val() * 60;
-        $("#map, #btnShow, .controls-row, #counter, #counter2").show();
-    });
+//    $("#btnChange").click(function ()
+//    {
+//        location.reload();
+//    });
 
 
-    $("#btnStart").click(function ()
-    {
+//    $("#btnShow").click(function ()
+//    {
+//        $("#txt, #btnHide").show();
+//        $("#map, #btnShow, .controls-row").hide();
 
-        $('#btnStart').hide();
-        $('#btnStop').show();
-        var prevLatLng;
+//    });
+//    $("#btnHide").click(function ()
+//    {
+//        $("#txt, #btnHide").hide();
+//        $("#map, #btnShow, .controls-row").show();
+//    });
+//    $("#btnSettings").click(function ()
+//    {
+//        $("#settings, #btnClose").show();
+//        $("#map, #btnShow, .controls-row, #counter, #counter2").hide();
+//    });
+//    $("#btnSet").click(function ()
+//    {
+//        $("#settings, #btnClose").hide();
+//        interval = $('#bar').val() * 60;
+//        $("#map, #btnShow, .controls-row, #counter, #counter2").show();
+//    });
 
 
-        timer = $.timer(function ()
-        {
-            count++;
-            $('#counter').html('<b>Elapsed time:</b> ' + getTime(count));
-            if (count % interval == 0 || count == 1)
-            {
-                console.log(count);
-                map.on("locationfound", function (location)
-                {
-                    if (!marker)
-                        marker = L.userMarker(location.latlng, { pulsing: true, accuracy: 500, smallIcon: true
-                        }).addTo(map);
-                    marker.setLatLng(location.latlng);
-                    marker.setAccuracy(location.accuracy);
-                    marker.addTo(map);
+//    $("#btnStart").click(function ()
+//    {
 
-                    if (location.latlng != prevLatLng)
-                    {
-                        var note = new Note();
-                        var point = new Parse.GeoPoint({ latitude: location.latlng.lat, longitude: location.latlng.lng });
-                        note.save({ count: count, title: val, body: 'tracker', location: point },
-                        {
-                            success: function (note)
-                            {
-                                $('#counter2').html('Saved the object at: ' + getTime(count));
-                                //getLine(Note, map, val);
-                            },
-                            error: function (note, error)
-                            {
-                                $('#counter2').html('Could not save object at: ' + getTime(count));
-                            }
-                        });
+//        $('#btnStart').hide();
+//        $('#btnStop').show();
+//        var prevLatLng;
 
-                        prevLatLng = location.latlng;
-                    }
 
-                });
+//        timer = $.timer(function ()
+//        {
+//            count++;
+//            $('#counter').html('<b>Elapsed time:</b> ' + getTime(count));
+//            if (count % interval == 0 || count == 1)
+//            {
+//                console.log(count);
+//                map.on("locationfound", function (location)
+//                {
+//                    if (!marker)
+//                        marker = L.userMarker(location.latlng, { pulsing: true, accuracy: 500, smallIcon: true
+//                        }).addTo(map);
+//                    marker.setLatLng(location.latlng);
+//                    marker.setAccuracy(location.accuracy);
+//                    marker.addTo(map);
 
-                var zm = map.getZoom();
-                map.locate({ watch: false,
-                    locate: true, setView: true, enableHighAccuracy: true,
-                    maxZoom: zm, maximumAge: 10000, timeout: 10000
-                });
+//                    if (location.latlng != prevLatLng)
+//                    {
+//                        var note = new Note();
+//                        var point = new Parse.GeoPoint({ latitude: location.latlng.lat, longitude: location.latlng.lng });
+//                        note.save({ count: count, title: val, body: 'tracker', location: point },
+//                        {
+//                            success: function (note)
+//                            {
+//                                $('#counter2').html('Saved the object at: ' + getTime(count));
+//                                //getLine(Note, map, val);
+//                            },
+//                            error: function (note, error)
+//                            {
+//                                $('#counter2').html('Could not save object at: ' + getTime(count));
+//                            }
+//                        });
 
-            }
+//                        prevLatLng = location.latlng;
+//                    }
 
-        });
-        timer.set({ time: 1000, autostart: true });
-    });
+//                });
 
-    $("#btnStop").click(function ()
-    {
-        $('#counter, #counter2').html('<br>');
-        $('#btnStop').hide();
-        $('#btnStart').show();
-        timer.stop();
-    });
+//                var zm = map.getZoom();
+//                map.locate({ watch: false,
+//                    locate: true, setView: true, enableHighAccuracy: true,
+//                    maxZoom: zm, maximumAge: 10000, timeout: 10000
+//                });
 
-});
+//            }
+
+//        });
+//        timer.set({ time: 1000, autostart: true });
+//    });
+
+//    $("#btnStop").click(function ()
+//    {
+//        $('#counter, #counter2').html('<br>');
+//        $('#btnStop').hide();
+//        $('#btnStart').show();
+//        timer.stop();
+//    });
+
+//});
 
 function SavePosition(val, count, txt, latlng, Note)
 {
@@ -236,7 +237,7 @@ function getLine(NoteObject, map, val) {
   }
   
 
-function createMap(map, json)
+function createMap(map, lat, lng)
 {
     
     var map = new L.map('map', 
@@ -252,7 +253,7 @@ function createMap(map, json)
     map.addLayer(osmLayer);
     //addLocateControl(map);
     showElevation(map, json.gpx_file);
-    $.get(json.html_file, function (data){$("#txt").html(data)});
+    //$.get(json.html_file, function (data){$("#txt").html(data)});
     return map;
 }
 

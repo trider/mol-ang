@@ -19,12 +19,7 @@ describe('molApp App', function() {
              expect(repeater('#rides option').count()).toBe(5);
         });
 
-        it('Creates a list of 5 days', function ()
-        {
-             expect(repeater('#rides option').count()).toBe(5);
-        });
-
-         it('Creates a list of 10 routes', function ()
+        it('Creates a list of 10 routes', function ()
         {
              expect(repeater('#routes li').count()).toBe(10);
         });
@@ -44,14 +39,11 @@ describe('molApp App', function() {
         });
         
         
-        it('Should be possible to filter list by rides and days menus',
+        it('Should be possible to filter list by onroad rides and return a list of 5 rides',
         function() {
             
-           select('ridesquery').option('Offroad');
-           select('daysquery').option('Day 1');
-           expect(repeater('#routes li').count()).toBe(1);
-           expect(repeater('#routes li', 'Routes List').column('route.type')).toEqual(['Offroad']);
-           expect(repeater('#routes li', 'Routes List').column('route.name')).toEqual(['Day 1']);
+           select('ridesquery').option('Onroad');
+           expect(repeater('#routes li').count()).toBe(5)
         });
 
     });
@@ -62,6 +54,7 @@ describe('molApp App', function() {
           browser().navigateTo('../../app/index.html#/maps/offroad_day_1');
         });
  
+
         it('Should display correct page title', function() {
           expect(binding('ridedata.title')).toBe('Offroad Day 1');
         });

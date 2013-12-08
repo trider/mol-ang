@@ -1,4 +1,4 @@
-var molAppControllers = angular.module('molAppControllers', []);
+var molAppControllers = angular.module('molAppControllers', ["leaflet-directive"]);
 
 molAppControllers.controller('RideListCtrl', ['$scope', '$http', '$location',
   function ($scope, $http, $location)
@@ -27,9 +27,26 @@ molAppControllers.controller('MapCtrl', ['$scope', '$routeParams', '$http',
     $scope.mapID = $routeParams.ID;
     $http.get('data/' + $routeParams.ID + '.json').success(function(data) {
       $scope.ridedata = data;
-    });
 
-  }]);
+      angular.extend($scope, {
+        
+        tileLayer: 'http://{s}.tile.cloudmade.com/ba8af3a046054cefaed65ea8ca002dc1/101270/256/{z}/{x}/{y}.png";',
+        
+        center: {
+            lat: data.lat,
+            lng: data.lng,
+            zoom: 12
+            }
+        });
+    });
+    
+ }]);
+
+
+
+
+
+
 
 
 
