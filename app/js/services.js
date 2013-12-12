@@ -1,9 +1,21 @@
-'use strict';
+var molAppServices = angular.module('molAppServices', ['ngResource']);
+ 
+molAppServices.factory('Routes', ['$resource',
+  function($resource){
+				
+				return $resource('data/routes.json', {}, {
+						query: {method:'GET', params:{ID:'routes'}, isArray:true, cache: true}
+    });
+}]);
 
-/* Services */
+
+molAppServices.factory('Map', ['$resource',
+  function($resource){
+			
+    return $resource('data/:mapID.json', {}, {
+						query: {method:'GET', params:{mapID:'map'}, isArray:true, cache: true}
+				});
+}]);
 
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('myApp.services', []).
-  value('version', '0.1');
+

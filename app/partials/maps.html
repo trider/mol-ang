@@ -2,27 +2,46 @@
     <div class="panel-heading">
         <h2 class="panel-title">{{ ridedata.title }}</h2>
     </div>
-    <div class="panel-body">
+
+    <!--<div class="panel-body">
         <div id="ctrls" class="btn-group">
             <button class="btn-mini btn-inverse" ng-click="go('/rides')"><span class="glyphicon glyphicon-home icon-white"></i></button>
             <button class="btn-mini btn-success" id="btnStart">Start tracking</button>
-            <!--<button class="btn-mini btn-danger" id="btnStop">Stop tracking</button>-->
+            <button class="btn-mini btn-danger" id="btnStop">Stop tracking</button>
             <button class="btn-mini btn-info" id="btnShow">Show desciption</button> 
             <button class="btn-mini btn-inverse" id="btnSettings"><span class="glyphicon glyphicon-cog icon-white"></i></button>
-        </div>
-        <div>
-            <br>
-            <leaflet defaults="defaults" center="center" ></leaflet>
-        </div>
-        
-    </div>
+        </div>						
+    </div>-->
+
     <ul class="list-group">
-    <li class="list-group-item">Map: {{ ridedata.html }}</li>
-    <li class="list-group-item">Map: {{ ridedata.mapfile }}</li>
-    <li class="list-group-item">Lat: {{ ridedata.lat }}</li>
-    <li class="list-group-item">Lng: {{ ridedata.lng }}</li>
+					<li class="list-group-item">
+								<div id="mapWithLayers255" 
+										style="height:350px" 
+										data-geo-type="map" 
+										data-geo-basemap="Thunderforest.OpenCycleMap" 
+										data-geo-centre="{{ ridedata.lat }},{{ ridedata.lng }}" 
+										data-geo-zoom=10 ></div>
+ 
+								<a id="tempLayer25" 
+										data-geo-type="featureLayer" 
+										data-geo-layer-type="gpx" 
+										data-geo-map="mapWithLayers255" 
+										href=" {{ ridedata.mapfile }} "></a> 
+					
+					</li>
+					<li class="list-group-item">HTML: {{ ridedata.html }}</li>
+					<li class="list-group-item">Mapfile: {{ ridedata.mapfile }}</li>
+					<li class="list-group-item">Lat: {{ ridedata.lat }}</li>
+					<li class="list-group-item">Lng: {{ ridedata.lng }}</li>
     </ul>         
 </div>
+
+<button class="btn btn-info" ng-click="go('/rides')">Back</button> 
+<button class="btn btn-info" ng-click="refresh()">Refresh</button>
+
+
+
+
 
 
 

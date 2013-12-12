@@ -1,25 +1,30 @@
-<div class="panel panel-primary">
+<div class="panel panel-primary" >
     <div class="panel-heading"><strong>Maps of Love</strong></div>           
     <div class="panel-body">
         <select id="rides" 
             ng-model="ridesquery"
             ng-options="ride for ride in rides"
+												ng-change="update()"
             class="form-control input-sm" >
             <option value="">-- Choose a ride--</option>
         </select>
-        <br>
-        <div class="panel panel-primary">
-            <ul id="routes" class="list-group">
-                <li class="list-group-item" ng-repeat="route in routes | filter:ridesquery | filter:daysquery">
-                    <a href="#/maps/{{route.ID}}">{{ route.type }} : {{ route.name }} ({{ route.ID }})</a>
-                </li>
-            </ul>
-        </div>
-        <button class="btn btn-info" ng-click="go('/about')">About</button>
-        <button class="btn btn-danger" ng-click="go('/donate')">Donate</button>  
-    </div> 
-    </div>
+        <!--<div class="panel panel-primary"></div>-->
+							<div id="lists" ng-repeat="ride in rides | filter:ridesquery | filter:ride "ng-show="ridesquery"><h4>{{ ride }}</h4>				
+									<ul id="routes" class="list-group">
+										<li class="list-group-item" ng-repeat="route in routes | filter:ridesquery | filter:ride ">			 	
+												<a href="#/maps/{{route.ID}}"> {{ route.name }} </a>
+										</li>
+									</ul>
+							</div>								
+    </div> 		
+  </div>
+		<div class="thumbnail">
+			<img src="images/start.jpg" class="img-responsive" alt="Maps of Love" id="pic">
+		</div>
+	<button class="btn btn-info" ng-click="go('/about')">About</button>
+ <button class="btn btn-danger" ng-click="go('/donate')">Donate</button>
 </div>
+	
     
     
     

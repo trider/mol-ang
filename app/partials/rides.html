@@ -1,0 +1,27 @@
+<div class="panel panel-primary" >
+  <div class="panel-heading"><strong>Maps of Love</strong></div>           
+    <div class="panel-body">
+       <select id="rides" 
+           ng-model="ridesquery"
+           ng-options="ride for ride in rides"
+											ng-change="update()"
+           class="form-control input-sm" >
+           <option value="">-- Choose a ride--</option>
+       </select>
+							<div ng:repeat="ride in rides | filter:ridesquery | filter:ride "><h4>{{ ride }}</h4>				
+									<ul id="routes" class="list-group">
+										<li class="list-group-item" ng-repeat="route in routes | filter:ridesquery | filter:ride " >			 	
+												<a href="#/maps/{{route.ID}}"> {{ route.name }} </a>
+										</li>
+									</ul>
+								</div>		
+        
+       <button class="btn btn-info" ng-click="go('/about')">About</button>
+       <button class="btn btn-danger" ng-click="go('/donate')">Donate</button>
+    </div> 
+  </div>
+</div>
+    
+    
+    
+
