@@ -1,29 +1,46 @@
+<br>
 <div class="panel panel-primary" >
     <div class="panel-heading"><strong>Maps of Love</strong></div>           
     <div class="panel-body">
-        <select id="rides" 
+							<select id="rides" 
             ng-model="ridesquery"
             ng-options="ride for ride in rides"
 												ng-change="update()"
             class="form-control input-sm" >
-            <option value="">-- Choose a ride--</option>
+            <option value=""> -- Choose a ride --	</option>
         </select>
-        <!--<div class="panel panel-primary"></div>-->
-							<div id="lists" ng-repeat="ride in rides | filter:ridesquery | filter:ride "ng-show="ridesquery"><h4>{{ ride }}</h4>				
+							<br>
+							<div>
+								<!--<div class="panel panel-primary"></div>-->
+							<div id="lists" ng-repeat="ride in rides | filter:ridesquery | filter:ride" ng-show="ridesquery"><h4>{{ ride }}</h4>				
 									<ul id="routes" class="list-group">
 										<li class="list-group-item" ng-repeat="route in routes | filter:ridesquery | filter:ride ">			 	
-												<a href="#/maps/{{route.ID}}"> {{ route.name }} </a>
+												<a href="#/maps/{{route.ID}}">{{ route.name }}</a>
 										</li>
 									</ul>
-							</div>								
-    </div> 		
+							</div>
+							<!--<div id="lists" ng-repeat="ride in rides | filter:ridesquery"><label>{{ ride }}</label>				
+									<ul id="routes" class="list-group">
+										<li class="list-group-item" ng-repeat="route in routes | filter:ridesquery | filter:ride ">			 	
+												<a href="#/maps/{{route.ID}}">{{ route.name }}</a>
+										</li>
+									</ul>
+							</div>			 							
+							</div>-->
+						
+							
+							
+								<div class="thumbnail" id="pic">
+									<img src="images/start.jpg" class="img-responsive" alt="Maps of Love" >
+								</div>
+							<div mol-about id="about"><div>					
+    </div>
   </div>
-		<div class="thumbnail">
-			<img src="images/start.jpg" class="img-responsive" alt="Maps of Love" id="pic">
-		</div>
-	<button class="btn btn-info" ng-click="go('/about')">About</button>
- <button class="btn btn-danger" ng-click="go('/donate')">Donate</button>
+		
+		<button class="btn btn-info	btn-xs" ng-click="show()" id="show">About</button>
+		<button class="btn btn-info btn-xs" ng-click="hide()" id="back">Close</button> 
 </div>
+
 	
     
     

@@ -1,0 +1,148 @@
+{ "Routes":
+    { 
+  "Offroad": {
+    "Day 1": {
+      "ID": "offroad_day_1",
+      "title": "Offroad Day 1",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    },
+    "Day 2": {
+      "ID": "offroad_day_2",
+      "title": "Offroad Day 2",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    },
+    "Day 3": {
+      "ID": "offroad_day_2",
+      "title": "Offroad Day 2",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    },
+    "Day 4": {
+      "ID": "offroad_day_3",
+      "title": "Offroad Day 3",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    },
+    "Day 5": {
+      "ID": "offroad_day_4",
+      "title": "Offroad Day 5",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    }
+  },
+  "Onroad": {
+    "Day 1": {
+      "ID": "offroad_day_1",
+      "title": "Offroad Day 1",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    },
+    "Day 2": {
+      "ID": "offroad_day_2",
+      "title": "Offroad Day 2",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    },
+    "Day 3": {
+      "ID": "offroad_day_2",
+      "title": "Offroad Day 2",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    },
+    "Day 4": {
+      "ID": "offroad_day_3",
+      "title": "Offroad Day 3",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    },
+    "Day 5": {
+      "ID": "offroad_day_4",
+      "title": "Offroad Day 5",
+      "mapfile": "data/offroad_day1_geo.json",
+      "html": "partials/pages/offroad/day1.html",
+      "start": {
+        "lat": 32.51995550285581,
+        "lng": 34.926939513672785
+      },
+      "end": {
+        "lat": 32.60967,
+        "lng": 34.918331
+      }
+    }
+  }
+}
+}

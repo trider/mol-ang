@@ -18,4 +18,13 @@ molAppServices.factory('Map', ['$resource',
 }]);
 
 
+molAppServices.factory('Path', ['$resource',
+  function($resource){
+			
+    return $resource('data/:mapID.json', {}, {
+						query: {method:'GET', params:{mapID:'map'}, isArray:true, cache: true}
+				});
+}]);
+
+
 

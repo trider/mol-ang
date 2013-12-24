@@ -1,7 +1,12 @@
 {
   "title" : "Offroad Day 1",
-  "mapfile" : "data/test/offroad.gpx.xml",
-  "html" : "data/pages/offroad/day1.html",
+  "mapfile" : "data/offroad_day1_geo.json",
+  "html" : "partials/pages/offroad/day1.html",
   "lat" : 32.51995550285581,
-  "lng" : 34.926939513672785 
+  "lng" : 34.926939513672785,
+		"startlat" : 32.403507,
+  "startlng" : 34.867412,
+		"endlat" : 32.60967,
+  "endlng" : 34.918331
 }
+	

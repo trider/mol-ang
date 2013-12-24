@@ -8,16 +8,19 @@
            class="form-control input-sm" >
            <option value="">-- Choose a ride--</option>
        </select>
-							<div ng:repeat="ride in rides | filter:ridesquery | filter:ride "><h4>{{ ride }}</h4>				
+							<!--<div ng:repeat="ride in rides | filter:ridesquery | filter:ride "><h4>{{ ride }}</h4>				
 									<ul id="routes" class="list-group">
-										<li class="list-group-item" ng-repeat="route in routes | filter:ridesquery | filter:ride " >			 	
+										<li class="list-group-item" ng-repeat="route in routes | filter:ridesquery" >			 	
 												<a href="#/maps/{{route.ID}}"> {{ route.name }} </a>
 										</li>
 									</ul>
-								</div>		
-        
-       <button class="btn btn-info" ng-click="go('/about')">About</button>
-       <button class="btn btn-danger" ng-click="go('/donate')">Donate</button>
+								</div>-->
+								<div ng:repeat="ride in rides | filter:ridesquery "><h4>{{ ride }}</h4></div>	
+									<ul id="routes" class="list-group">						
+										<li class="list-group-item" ng-repeat="route in routes | filter:ridesquery" >			 	
+											<a href="#/maps/{{route.ID}}"> {{ route.name }} </a>
+										</li>
+									</ul>
     </div> 
   </div>
 </div>

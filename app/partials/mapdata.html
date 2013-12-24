@@ -1,0 +1,30 @@
+<br>
+<div class="panel panel-info">
+ <div class="panel-heading">
+     <h2 class="panel-title">{{ ridedata.title }}</h2>
+ </div>
+ <ul class="list-group">
+		<li class="list-group-item">
+			<button class="btn btn-info  btn-xs" ng-click="go('/rides')" id="home">Back</button> 
+			<button class="btn btn-info  btn-xs" ng-click="show()" id="showdetails">Show Details</button>
+			<button class="btn btn-info  btn-xs" ng-click="hide()" id="hidedetails">Hide Details</button>
+		</li>
+		<li class="list-group-item">
+				<leaflet center="center" markers="markers" geojson="geojson" height="350px" width="250px" class="map"></leaflet>
+			 <div my-details class="cnt"><div>
+		</li>
+ </ul>
+	</div>
+</div>
+     
+
+
+
+
+
+
+
+
+
+    
+

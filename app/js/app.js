@@ -3,20 +3,26 @@
 // Declare app level module which depends on filters, and services
 var molApp = angular.module('molApp', [ 'ngRoute', 'molAppControllers', 'molAppServices']);
 
-molApp.config(['$routeProvider', 
-  function($routeProvider) {
-    $routeProvider.
+molApp.config(['$routeProvider',
+  function ($routeProvider)
+  {
+  	$routeProvider.
         when('/rides', {
-            templateUrl: 'partials/rides-list.html', 
-            controller: 'RideListCtrl'}).
+        	templateUrl: 'partials/rides-list.html',
+        	controller: 'RideListCtrl'
+        }).
         when('/about', {
-            templateUrl: 'partials/about.html', 
-            controller: 'RideListCtrl'}).
+        	templateUrl: 'partials/about.html',
+        	controller: 'RideListCtrl'
+        }).
         when('/donate', {
-            templateUrl: 'partials/donate.html', 
-            controller: 'RideListCtrl'}).
-        when('/maps/:ID', {
-            templateUrl: 'partials/maps.html', 
-            controller: 'MapCtrl'});
+        	templateUrl: 'partials/donate.html',
+        	controller: 'RideListCtrl'
+        }).
+								when('/maps/:ID', {
+									templateUrl: 'partials/mapdata.html',
+									controller: 'MapCtrl'
+								});
 
-}]);
+
+  } ]);
