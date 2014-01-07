@@ -1,37 +1,38 @@
 var molAppControllers = angular.module('molAppControllers', ["leaflet-directive"]);
 
-molAppControllers.controller('RideListCtrl', ['$scope', 'Routes', '$location', '$http',
-  function ($scope, Routes, $location, $http)
+molAppControllers.controller('RideListCtrl', ['$scope', 'Routes', '$location', '$http', 'visible',
+  function ($scope, Routes, $location, $http, visible)
   {
 
 			
-		 $scope.rides = ['Offroad', 'Onroad'];
+		 $scope.rides = ['Offroad', 'Onroad', 'Challange', 'Touring'];
 			
 			$scope.routes = Routes.query();
-			angular.element('#about, #back, #list').hide();
+			visible.hide('#about, #back');
 			
 			$scope.show = function ()
   	{
-				 angular.element('#about, #back').show();
-					angular.element('#pic, #show, #hide, #list, #rides').hide();
+					visible.show('#about, #back');
+					visible.hide('#pic, #show, #hide, #accordion, #rides');
   	};
 
 			$scope.hide = function ()
   	{
-				 angular.element('#pic, #show, #list, #rides').show();
-					angular.element('#about, #back, #home').hide();
+				 
+					visible.show('#pic, #show, #accordion, #rides');
+					visible.hide('#about, #back, #home');
+					
   	};
 
 			$scope.update = function()
 			{
 							if(angular.element('#rides').val()=="")
 							{
-									angular.element('#pic, #show').show();
-
+									visible.show('#pic, #show');
 							}
 							else
 							{
-									angular.element('#pic, #show, #about, #back').hide();
+									visible.hide('#pic, #show, #about, #back');
 							}
 						
 			}
@@ -41,50 +42,107 @@ molAppControllers.controller('RideListCtrl', ['$scope', 'Routes', '$location', '
   	{
   		$location.path(path);
   	};
-  }]).directive('molAbout', function() {
-    
-				return {
-						transclude: true,
-      templateUrl: 'partials/about.html'
-    };
-  });
+  }]);
 
 
-  molAppControllers.controller('MapCtrl', ['$scope', '$routeParams', '$route', '$location', '$http', 'Map',
-  function ($scope, $routeParams, $route, $location, $http, Map)
+  molAppControllers.controller('MapCtrl', ['$scope', '$routeParams', '$route', '$location', 'Map', 'CurrTime', 'leafletData', 'visible', 'mapSize',
+  function ($scope, $routeParams, $route, $location, Map, CurrTime, leafletData, visible, mapSize)
   {
 
-  	angular.element('.cnt, #hidedetails').hide();
-			$scope.go = function (path)
+  	$scope.timer;
+  	$scope.mheight = mapSize.getMapSize();
+  	$scope.count = 0;
+  	visible.hide('.cnt, #hidedetails, #stop, #counter');
+  	$scope.go = function (path)
   	{
   		$location.path(path);
   	};
 
-			$scope.show = function ()
+  	$scope.show = function ()
   	{
-				 angular.element('.cnt, #hidedetails').show();
-					angular.element('#showdetails, .map, #home').hide();
+  		visible.show('.cnt, #hidedetails');
+  		visible.hide('#showdetails, .map, #home');
   	};
 
-			$scope.hide = function ()
+  	$scope.hide = function ()
   	{
-				 angular.element('.cnt, #hidedetails').hide();
-					angular.element('#showdetails, .map, #home').show();
+  		visible.hide('.cnt, #hidedetails');
+  		visible.show('#showdetails, .map, #home');
   	};
 
+  	$scope.start = function ()
+  	{
+  		count = 0;
+  		visible.hide('#start');
+  		visible.show('#stop, #counter');
+  		timer = jQuery.timer(function ()
+  		{
+  			count++;
+  			angular.element('#counter').html('<b>Elapsed time:</b> ' + CurrTime.getTime(count));
+  		});
+
+  		timer.set({ time: 1000, autostart: true });
+  	};
+
+  	$scope.stop = function ()
+  	{
+  		timer.stop();
+  		count = 0;
+  		visible.hide('#stop, #counter');
+  		visible.show('#start');
+  	};
 
   	angular.extend($scope, {
 
   		defaults: {
-  			tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png"
+  			tileLayer: "http://{s}.tile.opencyclemap.org/cycle/{z}/{x}/{y}.png",
+  			scrollWheelZoom: false
   		},
   		markers: {},
-				paths:{}
+  		paths: {}
   	});
 
 
   	$scope.ridedata = Map.get({ mapID: $routeParams.ID }, function (data)
   	{
+
+  		leafletData.getMap().then(function (map)
+  		{
+
+  			L_PREFER_CANVAS = true;
+  			L_DISABLE_3D = true;
+
+  			L.control.locate({
+  				position: 'topleft',
+  				drawCircle: true,
+  				strings: {
+  					title: "Show me where I am",
+  					popup: "You are within {distance} {unit} from this point",
+  					outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
+  				}
+  			}).addTo(map);
+
+  			var el = L.control.elevation({
+  				position: "topright",
+  				theme: "steelblue-theme",
+  				width: 100,
+  				height: 100,
+  				margins: { top: 10, right: 10, bottom: 20, left: 10 },
+  				useHeightIndicator: true,
+  				interpolation: "linear",
+  				hoverNumber: { decimalsX: 3, decimalsY: 0 },
+  				xTicks: undefined,
+  				yTicks: undefined
+  			});
+
+  			var g = new L.GPX(data.mapfile, { async: true });
+  			g.on("addline", function (e)
+  			{
+  				el.addData(e.line);
+  			});
+  			g.addTo(map);
+  			el.addTo(map);
+  		});
 
   		angular.extend($scope, {
 
@@ -92,61 +150,14 @@ molAppControllers.controller('RideListCtrl', ['$scope', 'Routes', '$location', '
   				lat: data.lat,
   				lng: data.lng,
   				zoom: 10
-  			},
-  			markers:
-  						{
-  							m1: {
-  								lat: data.startlat,
-  								lng: data.startlng,
-  								focus: true,
-  								message: "Start",
-  								draggable: false
-  							},
-									m2: {
-  								lat: data.endlat,
-  								lng: data.endlng,
-  								focus: true,
-  								message: "End",
-  								draggable: false
-  							}
-  							//},
-									//paths: {
-									//    p1: {
-									//        color: '#008000',
-									//        weight: 8,
-									//        latlngs: [
-									//            { lat: 32.51995550285581, lng: 34.926939513672785 },
-									//            { lat: 32.40341, lng: 34.867435 },
-									//            { lat: 32.403293, lng: 34.867508 }
-									//        ]
-									//    }
-        },
-  		});
+  			}
 
-				$http.get(data.mapfile).success(function(data, status) {
-        angular.extend($scope, {
-            geojson: {
-                data: data,
-                style: {
-                    fillColor: "blue",
-                    weight: 5,
-                    opacity: 1,
-                    color: 'black',
-                    fillOpacity: 1
-                }
-            }
-        });
-						});
+
+  		});
 
   	});
 
-		
-  }]).directive('myDetails', function() {
-    
-				return {
-      transclude: true,
-      templateUrl: 'partials/pages/offroad/day1.html'
-    };
-  });
+  } ]);
+
 
 

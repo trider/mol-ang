@@ -1,12 +1,16 @@
 {
   "title" : "Offroad Day 1",
-  "mapfile" : "data/offroad_day1_geo.json",
+  "mapfile" : "data/offroad.gpx",
   "html" : "partials/pages/offroad/day1.html",
   "lat" : 32.51995550285581,
   "lng" : 34.926939513672785,
 		"startlat" : 32.403507,
   "startlng" : 34.867412,
 		"endlat" : 32.60967,
-  "endlng" : 34.918331
+  "endlng" : 34.918331,
+		"start": "Michmoret",
+		"end": "Dor Beach",
+		"offroad" : "65.5 km, accumulative climb 250- 300m",
+		"enduro" : "70 km, accumulative climb 250- 300m" 
 }
 	

@@ -1,7 +1,7 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-var molApp = angular.module('molApp', [ 'ngRoute', 'molAppControllers', 'molAppServices']);
+var molApp = angular.module('molApp', [ 'ngRoute', 'molAppControllers', 'molAppServices', 'molAppDirectives']);
 
 molApp.config(['$routeProvider',
   function ($routeProvider)
@@ -22,6 +22,9 @@ molApp.config(['$routeProvider',
 								when('/maps/:ID', {
 									templateUrl: 'partials/mapdata.html',
 									controller: 'MapCtrl'
+								}).
+								otherwise({
+										redirectTo: '/rides'
 								});
 
 

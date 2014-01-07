@@ -2,17 +2,24 @@
 <div class="panel panel-info">
  <div class="panel-heading">
      <h2 class="panel-title">{{ ridedata.title }}</h2>
+					<p>{{ ridedata.start }} to {{ ridedata.end }}</p>
  </div>
- <ul class="list-group">
+ <ul class="list-group" id="list">
 		<li class="list-group-item">
 			<button class="btn btn-info  btn-xs" ng-click="go('/rides')" id="home">Back</button> 
 			<button class="btn btn-info  btn-xs" ng-click="show()" id="showdetails">Show Details</button>
 			<button class="btn btn-info  btn-xs" ng-click="hide()" id="hidedetails">Hide Details</button>
+			<button class="btn btn-info  btn-xs" ng-click="start()" id="start">Start</button>
+			<button class="btn btn-danger  btn-xs" ng-click="stop()" id="stop">Stop</button>
 		</li>
-		<li class="list-group-item">
-				<leaflet center="center" markers="markers" geojson="geojson" height="350px" width="250px" class="map"></leaflet>
+		<li class="list-group-item" id="counter">
+				
+		</li>
+			<li class="list-group-item">
+				<leaflet center="center" geojson="geojson" height="{{ mheight }}" width="100%" class="map"></leaflet>
 			 <div my-details class="cnt"><div>
 		</li>
+
  </ul>
 	</div>
 </div>
